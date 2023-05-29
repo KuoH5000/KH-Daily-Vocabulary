@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Daily Practice</title>
+		<title>Gita Practice</title>
 		<meta name="color-scheme" content="dark">
 		<style>
 			body {
@@ -13,17 +13,11 @@
 		</style>
 	</head>
 	<body>
-		<h1><b>五十音</b></h1>
-		<button onclick="ruShuffleButtonOnClicked();">Shuffle</button>
-		<button onclick="buttonReveal('tableRussian_tr_1');">Reveal</button>
-		<table id="tableRussian"></table>
-<!--		
-		<h1><b>五十音</b></h1>
-		<p>This is a paragraph.</p>
-		<p>Hidden</p>
-		<button>Shuffle</button>
-		<button>Reveal</button>
--->	</body>
+		<h1><b>單字</b></h1>
+		<button onclick="GitaShuffleButtonOnClicked();">Shuffle</button>
+		<button onclick="buttonReveal('tableGita_tr_1');">Reveal</button>
+		<table id="tableGita"></table>
+	</body>
 	<script type="module">
 	'use strict';
 	
@@ -72,25 +66,25 @@
 		table.appendChild(tableBody);
 	}
 
-	window.ruShuffleButtonOnClicked = () => {
-		const russianWords = [];
+	window.GitaShuffleButtonOnClicked = () => {
+		const GitaWords = [];
 		const translation = [];
 		shuffle(trimmedWords)
 			.slice(0, numberOfWords)
 			.forEach((str) => {
 				const words = str.split("-");
-				russianWords.push(words[0]);
+				GitaWords.push(words[0]);
 				translation.push(words[1]);
 			});
 
-		const tableID = "tableRussian";
-		updateTable(tableID, [russianWords, translation]);
+		const tableID = "tableGita";
+		updateTable(tableID, [GitaWords, translation]);
 		document.getElementById((tableID + "_tr_1")).hidden = true;
 	}
 
 	const numberOfWords = 5;
 
-	const inputWords = await fetch('japanWords.txt')
+	const inputWords = await fetch('GitaWords.txt')
 		.then(response => response.text())
 		.then(text => text);
 	
