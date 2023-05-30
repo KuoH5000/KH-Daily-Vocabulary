@@ -84,7 +84,7 @@
 
 	const numberOfWords = 5;
 
-	const inputWords = await fetch('GitaWords.txt')
+	const inputWords = await fetch('https://github.com/KuoH5000/KH-Daily-Vocabulary/blob/master/GitaWords.txt')
 		.then(response => response.text())
 		.then(text => text);
 	
