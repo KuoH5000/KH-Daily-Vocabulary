@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Vietnamese Vocabulary Practice</title>
+		<meta name="color-scheme" content="dark">
+		<style>
+			body {
+				font-family: Microsoft JhengHei;
+			}
+			th, td {
+				padding: 15px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1><b>Vietnamese Vocabulary Practice</b></h1>
+		<button onclick="VNShuffleButtonOnClicked();">Shuffle</button>
+		<button onclick="buttonReveal('tableVN_tr_1');">Reveal</button>
+		<table id="tableVN"></table>
+	</body>
+	<script type="module">
+	'use strict';
+	
+	window.buttonReveal = (trID) => {
+		document.getElementById(trID).hidden = !document.getElementById(trID).hidden;
+	}
+
+	function shuffle(array) {
+		let currentIndex = array.length;
+		let randomIndex = 0;
+		// While there remain elements to shuffle.
+		while (currentIndex != 0) {
+			// Pick a remaining element.
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex--;
+			// And swap it with the current element.
+			[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+		}
+		return array;
+	}
+
+	function updateTable(tableID, tableData) {
+		const table = document.getElementById(tableID);
+		
+		const bodyID = "tbody_" + tableID;
+		let tableBody = document.getElementById(bodyID);
+		if (tableBody)
+			tableBody.remove();
+
+		tableBody = document.createElement('tbody');
+		tableBody.setAttribute("id", bodyID);
+
+		tableData.forEach((rowData, index) => {
+			const row = document.createElement('tr');
+			row.setAttribute("id", (tableID + "_tr_" + index));
+			
+			rowData.forEach(function(cellData) {
+				const cell = document.createElement('td');
+				cell.appendChild(document.createTextNode(cellData));
+				row.appendChild(cell);
+			});
+
+			tableBody.appendChild(row);
+		});
+
+		table.appendChild(tableBody);
+	}
+
+	window.VNShuffleButtonOnClicked = () => {
+		const VNWords = [];
+		const translation = [];
+		shuffle(trimmedWords)
+			.slice(0, numberOfWords)
+			.forEach((str) => {
+				const words = str.split("-");
+				VNWords.push(words[0]);
+				translation.push(words[1]);
+			});
+
+		const tableID = "tableVN";
+		updateTable(tableID, [VNWords, translation]);
+		document.getElementById((tableID + "_tr_1")).hidden = true;
+	}
+
+	const numberOfWords = 5;
+
+	const inputWords = await fetch('VNWords.txt')
+		.then(response => response.text())
+		.then(text => text);
+	
+	const trimmedWords = inputWords.split('\n')
+		.map(str => str.trim())
+		.filter(str => (str.length > 0));
+	
+	</script>
+</html>
