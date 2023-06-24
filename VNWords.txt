@@ -1,5 +1,5 @@
-Xin chào - Hello
-Cảm ơn - Thank you
-Tôi - I, me
-Đẹp - Beautiful
-Ăn - Eat
+Xin chào - 你好
+Cảm ơn - 謝謝
+Tôi - 我
+Đẹp - 美麗
+Ăn - 吃
